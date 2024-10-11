@@ -18,8 +18,6 @@ definitions:
     type: object
   models.CartItem:
     properties:
-      cart:
-        $ref: '#/definitions/models.Cart'
       cart_id:
         type: integer
       id:
@@ -29,6 +27,7 @@ definitions:
       product:
         $ref: '#/definitions/models.Product'
       product_id:
+        description: Cart      *Cart    `json:"cart" gorm:"foreignKey:CartID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
         type: integer
       quantity:
         type: integer
@@ -226,6 +225,42 @@ definitions:
 info:
   contact: {}
 paths:
+  /cart/:
+    get:
+      responses: {}
+      summary: Get all cart
+      tags:
+      - Cart
+    post:
+      parameters:
+      - description: Cart data
+        in: body
+        name: cart
+        required: true
+        schema:
+          $ref: '#/definitions/models.Cart'
+      responses: {}
+      summary: Create cart
+      tags:
+      - Cart
+  /cartitem/:
+    get:
+      responses: {}
+      summary: Create cart item
+      tags:
+      - Cart Item
+    post:
+      parameters:
+      - description: CartItem data
+        in: body
+        name: cartitem
+        required: true
+        schema:
+          $ref: '#/definitions/models.CartItem'
+      responses: {}
+      summary: Create cart item
+      tags:
+      - Cart Item
   /category/:
     get:
       responses: {}

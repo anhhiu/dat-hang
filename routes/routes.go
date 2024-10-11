@@ -49,6 +49,24 @@ func SetUpRouter() *gin.Engine {
 		review.DELETE("/:id", controllers.DeleteReview)
 	}
 
+	cartitem := r.Group("/api/cartitem")
+	{
+		cartitem.GET("/", controllers.GetAllCartItem)
+		cartitem.POST("/", controllers.CreateCartItem)
+		//cartitem.GET("/:id", controllers.GetReviewById)
+		//cartitem.PUT("/:id", controllers.UpdateReview)
+		//cartitem.DELETE("/:id", controllers.DeleteReview)
+	}
+
+	cart := r.Group("/api/cart")
+	{
+		cart.GET("/", controllers.GetAllCart)
+		cart.POST("/", controllers.CreateCart)
+		//cart.GET("/:id", controllers.GetReviewById)
+		//cart.PUT("/:id", controllers.UpdateReview)
+		//cart.DELETE("/:id", controllers.DeleteReview)
+	}
+
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	return r
 }

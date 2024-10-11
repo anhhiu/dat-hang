@@ -15,6 +15,60 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/cart/": {
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Get all cart",
+                "responses": {}
+            },
+            "post": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Create cart",
+                "parameters": [
+                    {
+                        "description": "Cart data",
+                        "name": "cart",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Cart"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/cartitem/": {
+            "get": {
+                "tags": [
+                    "Cart Item"
+                ],
+                "summary": "Create cart item",
+                "responses": {}
+            },
+            "post": {
+                "tags": [
+                    "Cart Item"
+                ],
+                "summary": "Create cart item",
+                "parameters": [
+                    {
+                        "description": "CartItem data",
+                        "name": "cartitem",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CartItem"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/category/": {
             "get": {
                 "tags": [
@@ -349,9 +403,6 @@ const docTemplate = `{
         "models.CartItem": {
             "type": "object",
             "properties": {
-                "cart": {
-                    "$ref": "#/definitions/models.Cart"
-                },
                 "cart_id": {
                     "type": "integer"
                 },
@@ -365,6 +416,7 @@ const docTemplate = `{
                     "$ref": "#/definitions/models.Product"
                 },
                 "product_id": {
+                    "description": "Cart      *Cart    ` + "`" + `json:\"cart\" gorm:\"foreignKey:CartID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE\"` + "`" + `",
                     "type": "integer"
                 },
                 "quantity": {

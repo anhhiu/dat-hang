@@ -2,7 +2,7 @@ package models
 
 import "time"
 
-//giỏ hàng - 1
+//giỏ hàng
 type Cart struct {
 	ID         uint       `json:"id" gorm:"primaryKey"`
 	UserID     uint       `json:"user_id"`
