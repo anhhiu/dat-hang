@@ -109,7 +109,14 @@ func GetCategoryById(c *gin.Context) {
 // @Router /category/{id} [put]
 func UpdatedCategory(c *gin.Context) {
 	var input struct {
-		Name string `json:"name"`
+		Name     string `json:"name"`
+		Products []struct {
+			Name        string  `json:"name"`
+			Hinh        string  `json:"hinh"`
+			Price       float64 `json:"price"`
+			Stock       int     `json:"stock"`
+			Description string  `json:"description"`
+		}
 	}
 
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -128,10 +135,35 @@ func UpdatedCategory(c *gin.Context) {
 	category.Name = input.Name
 	category.UpdatedAt = &updataat
 
-	if err := databases.DB.Preload("Product").Save(&category).Error; err != nil {
+	if err := databases.DB.Save(&category).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}
+
+	for _, p := range input.Products {
+
+		var product models.Product
+
+		if err := databases.DB.Where("id = ?", c.Param("id")).First(&product).Error; err != nil {
+			c.JSON(http.StatusNotFound, err.Error())
+			return
+		}
+
+		product.Name = p.Name
+		product.Description = p.Description
+		product.Hinh = p.Hinh
+		product.CategoryID = category.ID
+		product.Price = p.Price
+		product.Stock = p.Stock
+		product.UpdatedAt = &updataat
+
+		if err := databases.DB.Save(&product).Error; err != nil {
+			c.JSON(http.StatusInternalServerError, err.Error())
+			return
+		}
+		//c.JSON(http.StatusOK, product)
+	}
+
 	c.JSON(http.StatusOK, category)
 }
 

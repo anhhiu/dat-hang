@@ -417,7 +417,7 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "created_at": {
-                    "description": "Category    *Category  ` + "`" + `json:\"category\" gorm:\"foreignKey:CategoryID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE\"` + "`" + `",
+                    "description": "Category    *Category  ` + "`" + `json:\"category\" gorm:\"foreignKey:CategoryID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE\"` + "`" + ` //  không cần thiết trường này",
                     "type": "string"
                 },
                 "description": {

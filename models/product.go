@@ -11,7 +11,7 @@ type Product struct {
 	Stock       int     `json:"stock"`
 	Hinh        string  `json:"hinh"`
 	CategoryID  uint    `json:"category_id"`
-	//Category    *Category  `json:"category" gorm:"foreignKey:CategoryID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
+	//Category    *Category  `json:"category" gorm:"foreignKey:CategoryID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"` //  không cần thiết trường này
 	CreatedAt *time.Time `json:"created_at"`
 	UpdatedAt *time.Time `json:"updated_at"`
 }
