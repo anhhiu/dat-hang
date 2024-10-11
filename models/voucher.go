@@ -8,6 +8,6 @@ type Voucher struct {
 	Code      string     `json:"code"`
 	Discount  float64    `json:"discount"`
 	Expiry    *time.Time `json:"expiry"`
-	Orders    []Order    `json:"orders" gorm:"foreignKey:VoucherID"`
+	Orders    []Order    `json:"orders" gorm:"foreignKey:VoucherID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
 	CreatedAt *time.Time `json:"created_at"`
 }

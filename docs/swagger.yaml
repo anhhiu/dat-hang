@@ -1,4 +1,352 @@
+definitions:
+  models.Cart:
+    properties:
+      cart_items:
+        items:
+          $ref: '#/definitions/models.CartItem'
+        type: array
+      created_at:
+        type: string
+      id:
+        type: integer
+      total_price:
+        type: number
+      user:
+        $ref: '#/definitions/models.User'
+      user_id:
+        type: integer
+    type: object
+  models.CartItem:
+    properties:
+      cart:
+        $ref: '#/definitions/models.Cart'
+      cart_id:
+        type: integer
+      id:
+        type: integer
+      price:
+        type: number
+      product:
+        $ref: '#/definitions/models.Product'
+      product_id:
+        type: integer
+      quantity:
+        type: integer
+    type: object
+  models.Category:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      products:
+        items:
+          $ref: '#/definitions/models.Product'
+        type: array
+      updated_at:
+        type: string
+    type: object
+  models.Order:
+    properties:
+      cart:
+        $ref: '#/definitions/models.Cart'
+      cart_id:
+        type: integer
+      created_at:
+        type: string
+      id:
+        type: integer
+      order_details:
+        items:
+          $ref: '#/definitions/models.OrderDetail'
+        type: array
+      payment_status:
+        description: pending, completed, failed
+        type: string
+      shipping_address:
+        $ref: '#/definitions/models.ShippingAddress'
+      shipping_method:
+        $ref: '#/definitions/models.ShippingMethod'
+      shipping_method_id:
+        type: integer
+      status:
+        $ref: '#/definitions/models.OrderStatus'
+      status_id:
+        type: integer
+      total_price:
+        type: number
+      user:
+        $ref: '#/definitions/models.User'
+      user_id:
+        type: integer
+      voucher:
+        $ref: '#/definitions/models.Voucher'
+      voucher_id:
+        type: integer
+    type: object
+  models.OrderDetail:
+    properties:
+      id:
+        type: integer
+      order:
+        $ref: '#/definitions/models.Order'
+      order_id:
+        type: integer
+      price:
+        type: number
+      product:
+        $ref: '#/definitions/models.Product'
+      product_id:
+        type: integer
+      quantity:
+        type: integer
+    type: object
+  models.OrderStatus:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      status:
+        description: pending, shipped, delivered, cancelled
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.Product:
+    properties:
+      category_id:
+        type: integer
+      created_at:
+        description: Category    *Category  `json:"category" gorm:"foreignKey:CategoryID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
+        type: string
+      description:
+        type: string
+      hinh:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      price:
+        type: number
+      stock:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.ShippingAddress:
+    properties:
+      address:
+        type: string
+      city:
+        type: string
+      postal_code:
+        type: string
+    type: object
+  models.ShippingMethod:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      orders:
+        items:
+          $ref: '#/definitions/models.Order'
+        type: array
+    type: object
+  models.User:
+    properties:
+      address:
+        type: string
+      city:
+        type: string
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      orders:
+        description: Một người dùng có nhiều đơn hàng
+        items:
+          $ref: '#/definitions/models.Order'
+        type: array
+      password:
+        type: string
+      postal_code:
+        type: string
+    type: object
+  models.Voucher:
+    properties:
+      code:
+        type: string
+      created_at:
+        type: string
+      discount:
+        type: number
+      expiry:
+        type: string
+      id:
+        type: integer
+      orders:
+        items:
+          $ref: '#/definitions/models.Order'
+        type: array
+    type: object
 info:
   contact: {}
-paths: {}
+paths:
+  /category/:
+    get:
+      responses: {}
+      summary: Get all Categorys
+      tags:
+      - Category
+    post:
+      parameters:
+      - description: Category data
+        in: body
+        name: category
+        required: true
+        schema:
+          $ref: '#/definitions/models.Category'
+      responses: {}
+      summary: Create Categorys
+      tags:
+      - Category
+  /category/{id}:
+    delete:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: Delete Categorys by id
+      tags:
+      - Category
+    get:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: Get Categorys by id
+      tags:
+      - Category
+    put:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Category data
+        in: body
+        name: category
+        required: true
+        schema:
+          $ref: '#/definitions/models.Category'
+      responses: {}
+      summary: Update Categorys by id
+      tags:
+      - Category
+  /product/:
+    get:
+      responses: {}
+      summary: Get all product
+      tags:
+      - Product
+    post:
+      parameters:
+      - description: Product data
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/models.Product'
+      responses: {}
+      summary: Create product
+      tags:
+      - Product
+  /product/{id}:
+    delete:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: Delete product by id
+      tags:
+      - Product
+    get:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: Get product by id
+      tags:
+      - Product
+    put:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Product data
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/models.Product'
+      responses: {}
+      summary: Update product by id
+      tags:
+      - Product
+  /user/:
+    get:
+      responses: {}
+      summary: Get all users
+      tags:
+      - User
+    post:
+      parameters:
+      - description: User data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.User'
+      responses: {}
+      summary: Create users
+      tags:
+      - User
+  /user/{id}:
+    get:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: Get users by id
+      tags:
+      - User
 swagger: "2.0"

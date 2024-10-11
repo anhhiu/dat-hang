@@ -6,7 +6,7 @@ import "time"
 type OrderHistory struct {
 	ID        uint       `json:"id" gorm:"primaryKey"`
 	OrderID   uint       `json:"order_id"`
-	Order     *Order     `json:"order" gorm:"foreignKey:OrderID"`
+	Order     *Order     `json:"order" gorm:"foreignKey:OrderID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
 	Status    string     `json:"status"` // pending, shipped, delivered, cancelled
 	UpdatedAt *time.Time `json:"updated_at"`
 }
