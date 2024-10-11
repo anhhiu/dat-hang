@@ -3,6 +3,7 @@ package controllers
 import (
 	"dathang/databases"
 	"dathang/models"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -39,7 +40,7 @@ func CreateCart(c *gin.Context) {
 	for _, item := range input.CartItems {
 		var prd models.Product
 		if err := databases.DB.Where("id = ?", item.ProductID).First(&prd); err != nil {
-			c.JSON(500, err.Error)
+			c.JSON(http.StatusInternalServerError, err.Error)
 			return
 		}
 		cartitem := models.CartItem{
@@ -56,6 +57,7 @@ func CreateCart(c *gin.Context) {
 		//c.JSON(http.StatusCreated, cartitem)
 
 		tongTienCacDon += cartitem.Price
+		fmt.Printf("%f", tongTienCacDon)
 	}
 
 	cart.TotalPrice = tongTienCacDon
@@ -64,6 +66,7 @@ func CreateCart(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}
+	
 	c.JSON(http.StatusOK, gin.H{
 		"message":    "Giỏ hàng đã được tạo thành công",
 		"cart":       cart,
