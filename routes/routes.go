@@ -40,6 +40,15 @@ func SetUpRouter() *gin.Engine {
 
 	}
 
+	review := r.Group("/api/review")
+	{
+		review.GET("/", controllers.GetAllReview)
+		review.POST("/", controllers.CreateReview)
+		review.GET("/:id", controllers.GetReviewById)
+		review.PUT("/:id", controllers.UpdateReview)
+		review.DELETE("/:id", controllers.DeleteReview)
+	}
+
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	return r
 }

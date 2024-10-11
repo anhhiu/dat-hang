@@ -138,6 +138,28 @@ definitions:
       updated_at:
         type: string
     type: object
+  models.Review:
+    properties:
+      comment:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: integer
+      product:
+        $ref: '#/definitions/models.Product'
+      product_id:
+        type: integer
+      rating:
+        description: 1-5 sao
+        type: integer
+      updated_at:
+        type: string
+      user:
+        $ref: '#/definitions/models.User'
+      user_id:
+        type: integer
+    type: object
   models.ShippingAddress:
     properties:
       address:
@@ -320,6 +342,64 @@ paths:
       summary: Update product by id
       tags:
       - Product
+  /review/:
+    get:
+      responses: {}
+      summary: Get all review
+      tags:
+      - Review
+    post:
+      parameters:
+      - description: Review data
+        in: body
+        name: review
+        required: true
+        schema:
+          $ref: '#/definitions/models.Review'
+      responses: {}
+      summary: Create review
+      tags:
+      - Review
+  /review/{id}:
+    delete:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: Delete review by id
+      tags:
+      - Review
+    get:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: Get review by id
+      tags:
+      - Review
+    put:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Review data
+        in: body
+        name: review
+        required: true
+        schema:
+          $ref: '#/definitions/models.Review'
+      responses: {}
+      summary: Update review by id
+      tags:
+      - Review
   /user/:
     get:
       responses: {}

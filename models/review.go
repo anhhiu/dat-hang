@@ -12,4 +12,5 @@ type Review struct {
 	Product   *Product   `json:"product" gorm:"foreignKey:ProductID;references:ID;constraint:OnDelete:CASCADE;"`
 	User      *User      `json:"user" gorm:"foreignKey:UserID;references:ID"`
 	CreatedAt *time.Time `json:"created_at"`
+	UpdatedAt *time.Time `json:"updated_at"`
 }

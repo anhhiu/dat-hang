@@ -111,6 +111,7 @@ func UpdatedCategory(c *gin.Context) {
 	var input struct {
 		Name     string `json:"name"`
 		Products []struct {
+			ID          uint    `json:"id"`
 			Name        string  `json:"name"`
 			Hinh        string  `json:"hinh"`
 			Price       float64 `json:"price"`
@@ -144,7 +145,7 @@ func UpdatedCategory(c *gin.Context) {
 
 		var product models.Product
 
-		if err := databases.DB.Where("id = ?", c.Param("id")).First(&product).Error; err != nil {
+		if err := databases.DB.Where("id = ?", &p.ID).First(&product).Error; err != nil {
 			c.JSON(http.StatusNotFound, err.Error())
 			return
 		}
@@ -161,7 +162,7 @@ func UpdatedCategory(c *gin.Context) {
 			c.JSON(http.StatusInternalServerError, err.Error())
 			return
 		}
-		//c.JSON(http.StatusOK, product)
+		c.JSON(http.StatusOK, product)
 	}
 
 	c.JSON(http.StatusOK, category)
