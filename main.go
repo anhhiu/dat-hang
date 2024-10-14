@@ -26,7 +26,7 @@ func main() {
 
 	r := routes.SetUpRouter()
 
-	if err := r.Run(":9999"); err != nil {
+	if err := r.Run("192.168.1.60:9999"); err != nil {
 		log.Fatalf("loi roi %v", err.Error())
 	}
 }

@@ -11,3 +11,4 @@ type Voucher struct {
 	Orders    []Order    `json:"orders" gorm:"foreignKey:VoucherID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
 	CreatedAt *time.Time `json:"created_at"`
 }
+	

@@ -172,6 +172,8 @@ definitions:
     properties:
       created_at:
         type: string
+      description:
+        type: string
       id:
         type: integer
       name:
@@ -243,10 +245,50 @@ paths:
       summary: Create cart
       tags:
       - Cart
+  /cart/{id}:
+    delete:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: Delete cart
+      tags:
+      - Cart
+    get:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: Get cart by id
+      tags:
+      - Cart
+    put:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Cart data
+        in: body
+        name: cart
+        required: true
+        schema:
+          $ref: '#/definitions/models.Cart'
+      responses: {}
+      summary: Update cart
+      tags:
+      - Cart
   /cartitem/:
     get:
       responses: {}
-      summary: Create cart item
+      summary: Get all cart item
       tags:
       - Cart Item
     post:
@@ -259,6 +301,46 @@ paths:
           $ref: '#/definitions/models.CartItem'
       responses: {}
       summary: Create cart item
+      tags:
+      - Cart Item
+  /cartitem/{id}:
+    delete:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: Delete cart item
+      tags:
+      - Cart Item
+    get:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: Get cart item id
+      tags:
+      - Cart Item
+    put:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: CartItem data
+        in: body
+        name: cartitem
+        required: true
+        schema:
+          $ref: '#/definitions/models.CartItem'
+      responses: {}
+      summary: Update cart item
       tags:
       - Cart Item
   /category/:
@@ -319,6 +401,24 @@ paths:
       summary: Update Categorys by id
       tags:
       - Category
+  /orderstatus/:
+    get:
+      responses: {}
+      summary: Get ALL ShippingMethod
+      tags:
+      - Shipping Method
+    post:
+      parameters:
+      - description: OrderStatus data
+        in: body
+        name: orderstatus
+        required: true
+        schema:
+          $ref: '#/definitions/models.OrderStatus'
+      responses: {}
+      summary: Create OrderStatus
+      tags:
+      - Order Status
   /product/:
     get:
       responses: {}
@@ -435,6 +535,24 @@ paths:
       summary: Update review by id
       tags:
       - Review
+  /shippingmethod/:
+    get:
+      responses: {}
+      summary: Get ALL ShippingMethod
+      tags:
+      - Shipping Method
+    post:
+      parameters:
+      - description: ShippingMethod data
+        in: body
+        name: shippingmethod
+        required: true
+        schema:
+          $ref: '#/definitions/models.ShippingMethod'
+      responses: {}
+      summary: Create shippingmethod
+      tags:
+      - Shipping Method
   /user/:
     get:
       responses: {}
@@ -465,4 +583,62 @@ paths:
       summary: Get users by id
       tags:
       - User
+  /voucher/:
+    get:
+      responses: {}
+      summary: Get ALL voucher
+      tags:
+      - Voucher
+    post:
+      parameters:
+      - description: Voucher data
+        in: body
+        name: voucher
+        required: true
+        schema:
+          $ref: '#/definitions/models.Voucher'
+      responses: {}
+      summary: Create voucher
+      tags:
+      - Voucher
+  /voucher/{id}:
+    delete:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: Delete voucher
+      tags:
+      - Voucher
+    get:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: Get voucher by id
+      tags:
+      - Voucher
+    put:
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Voucher data
+        in: body
+        name: voucher
+        required: true
+        schema:
+          $ref: '#/definitions/models.Voucher'
+      responses: {}
+      summary: Update voucher
+      tags:
+      - Voucher
 swagger: "2.0"

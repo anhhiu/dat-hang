@@ -53,18 +53,38 @@ func SetUpRouter() *gin.Engine {
 	{
 		cartitem.GET("/", controllers.GetAllCartItem)
 		cartitem.POST("/", controllers.CreateCartItem)
-		//cartitem.GET("/:id", controllers.GetReviewById)
-		//cartitem.PUT("/:id", controllers.UpdateReview)
-		//cartitem.DELETE("/:id", controllers.DeleteReview)
+		cartitem.GET("/:id", controllers.GetCartItemById)
+		cartitem.PUT("/:id", controllers.UpdateCartItem)
+		cartitem.DELETE("/:id", controllers.DeleteCartItem)
 	}
 
 	cart := r.Group("/api/cart")
 	{
 		cart.GET("/", controllers.GetAllCart)
 		cart.POST("/", controllers.CreateCart)
-		//cart.GET("/:id", controllers.GetReviewById)
-		//cart.PUT("/:id", controllers.UpdateReview)
-		//cart.DELETE("/:id", controllers.DeleteReview)
+		cart.GET("/:id", controllers.GetCartById)
+		cart.PUT("/:id", controllers.UpdateCart)
+		cart.DELETE("/:id", controllers.DeleteCart)
+	}
+
+	voucher := r.Group("/api/voucher")
+	{
+		voucher.GET("/", controllers.GetAllVoucher)
+		voucher.POST("/", controllers.CreateVoucher)
+		voucher.GET("/:id", controllers.GetVoucherById)
+		voucher.PUT("/:id", controllers.UpdateVoucher)
+		voucher.DELETE("/:id", controllers.DeleteVoucher)
+	}
+
+	shippingmethod := r.Group("/api/shippingmethod")
+	{
+		shippingmethod.GET("/", controllers.GetAllShippingMethod)
+		shippingmethod.POST("/", controllers.CreateShippingMethod)
+	}
+	orderstatus := r.Group("/api/orderstatus")
+	{
+		orderstatus.GET("/", controllers.GetAllOrderStatus)
+		orderstatus.POST("/", controllers.CreateOrderStatus)
 	}
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))

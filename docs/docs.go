@@ -42,12 +42,71 @@ const docTemplate = `{
                 "responses": {}
             }
         },
+        "/cart/{id}": {
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Get cart by id",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Update cart",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Cart data",
+                        "name": "cart",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Cart"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
+            "delete": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Delete cart",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/cartitem/": {
             "get": {
                 "tags": [
                     "Cart Item"
                 ],
-                "summary": "Create cart item",
+                "summary": "Get all cart item",
                 "responses": {}
             },
             "post": {
@@ -64,6 +123,65 @@ const docTemplate = `{
                         "schema": {
                             "$ref": "#/definitions/models.CartItem"
                         }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/cartitem/{id}": {
+            "get": {
+                "tags": [
+                    "Cart Item"
+                ],
+                "summary": "Get cart item id",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "tags": [
+                    "Cart Item"
+                ],
+                "summary": "Update cart item",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "CartItem data",
+                        "name": "cartitem",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.CartItem"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
+            "delete": {
+                "tags": [
+                    "Cart Item"
+                ],
+                "summary": "Delete cart item",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {}
@@ -150,6 +268,33 @@ const docTemplate = `{
                         "name": "id",
                         "in": "path",
                         "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/orderstatus/": {
+            "get": {
+                "tags": [
+                    "Shipping Method"
+                ],
+                "summary": "Get ALL ShippingMethod",
+                "responses": {}
+            },
+            "post": {
+                "tags": [
+                    "Order Status"
+                ],
+                "summary": "Create OrderStatus",
+                "parameters": [
+                    {
+                        "description": "OrderStatus data",
+                        "name": "orderstatus",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.OrderStatus"
+                        }
                     }
                 ],
                 "responses": {}
@@ -327,6 +472,33 @@ const docTemplate = `{
                 "responses": {}
             }
         },
+        "/shippingmethod/": {
+            "get": {
+                "tags": [
+                    "Shipping Method"
+                ],
+                "summary": "Get ALL ShippingMethod",
+                "responses": {}
+            },
+            "post": {
+                "tags": [
+                    "Shipping Method"
+                ],
+                "summary": "Create shippingmethod",
+                "parameters": [
+                    {
+                        "description": "ShippingMethod data",
+                        "name": "shippingmethod",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ShippingMethod"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/user/": {
             "get": {
                 "tags": [
@@ -360,6 +532,92 @@ const docTemplate = `{
                     "User"
                 ],
                 "summary": "Get users by id",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/voucher/": {
+            "get": {
+                "tags": [
+                    "Voucher"
+                ],
+                "summary": "Get ALL voucher",
+                "responses": {}
+            },
+            "post": {
+                "tags": [
+                    "Voucher"
+                ],
+                "summary": "Create voucher",
+                "parameters": [
+                    {
+                        "description": "Voucher data",
+                        "name": "voucher",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Voucher"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/voucher/{id}": {
+            "get": {
+                "tags": [
+                    "Voucher"
+                ],
+                "summary": "Get voucher by id",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "put": {
+                "tags": [
+                    "Voucher"
+                ],
+                "summary": "Update voucher",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Voucher data",
+                        "name": "voucher",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Voucher"
+                        }
+                    }
+                ],
+                "responses": {}
+            },
+            "delete": {
+                "tags": [
+                    "Voucher"
+                ],
+                "summary": "Delete voucher",
                 "parameters": [
                     {
                         "type": "integer",
@@ -632,6 +890,9 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "created_at": {
+                    "type": "string"
+                },
+                "description": {
                     "type": "string"
                 },
                 "id": {
