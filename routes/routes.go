@@ -87,6 +87,12 @@ func SetUpRouter() *gin.Engine {
 		orderstatus.POST("/", controllers.CreateOrderStatus)
 	}
 
+	order := r.Group("/api/order")
+	{
+		order.GET("/", controllers.GetAllOrder)
+		order.POST("/", controllers.CreateOrder)
+	}
+
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 	return r
 }

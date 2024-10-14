@@ -401,6 +401,24 @@ paths:
       summary: Update Categorys by id
       tags:
       - Category
+  /order/:
+    get:
+      responses: {}
+      summary: Get All Order
+      tags:
+      - Order
+    post:
+      parameters:
+      - description: Order data
+        in: body
+        name: order
+        required: true
+        schema:
+          $ref: '#/definitions/models.Order'
+      responses: {}
+      summary: Create Order
+      tags:
+      - Order
   /orderstatus/:
     get:
       responses: {}

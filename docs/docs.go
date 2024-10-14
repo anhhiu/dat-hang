@@ -273,6 +273,33 @@ const docTemplate = `{
                 "responses": {}
             }
         },
+        "/order/": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get All Order",
+                "responses": {}
+            },
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Create Order",
+                "parameters": [
+                    {
+                        "description": "Order data",
+                        "name": "order",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Order"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/orderstatus/": {
             "get": {
                 "tags": [
